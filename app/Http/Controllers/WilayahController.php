@@ -2,63 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wilayah;
 use Illuminate\Http\Request;
 
 class WilayahController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $wilayah = Wilayah::withCount('jemaat')->get();
+        return view('content.sig.wilayah.index', compact('wilayah'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('content.sig.wilayah.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|max:100',
+            'keterangan' => 'nullable',
+        ]);
+
+        Wilayah::create($request->only(['nama', 'keterangan']));
+
+        return redirect()->route('wilayah.index')->with('success', 'Wilayah berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        return redirect()->route('wilayah.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $wilayah = Wilayah::findOrFail($id);
+        return view('content.sig.wilayah.edit', compact('wilayah'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|max:100',
+            'keterangan' => 'nullable',
+        ]);
+
+        $wilayah = Wilayah::findOrFail($id);
+        $wilayah->update($request->only(['nama', 'keterangan']));
+
+        return redirect()->route('wilayah.index')->with('success', 'Wilayah berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $wilayah = Wilayah::findOrFail($id);
+        $wilayah->delete();
+
+        return redirect()->route('wilayah.index')->with('success', 'Wilayah berhasil dihapus');
     }
 }
