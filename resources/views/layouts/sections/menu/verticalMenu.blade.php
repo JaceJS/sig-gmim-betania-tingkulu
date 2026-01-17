@@ -4,7 +4,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
   <!-- ! Hide app brand if navbar-full -->
-  <div class="app-brand demo">
+  <div class="app-brand demo justify-content-center">
     <a href="{{ url('/dashboard') }}" class="app-brand-link">
       <span class="app-brand-text demo menu-text fw-bold ms-2">{{ config('variables.templateName') }}</span>
     </a>
@@ -32,17 +32,18 @@
           $activeClass = null;
           $currentRouteName = Route::currentRouteName();
 
-          if ($currentRouteName === $menu->slug) {
+          // Direct match or starts with slug (for resource routes like wilayah.index, wilayah.create)
+          if ($currentRouteName === $menu->slug || str_starts_with($currentRouteName, $menu->slug . '.')) {
               $activeClass = 'active';
           } elseif (isset($menu->submenu)) {
               if (gettype($menu->slug) === 'array') {
                   foreach ($menu->slug as $slug) {
-                      if (str_contains($currentRouteName, $slug) and strpos($currentRouteName, $slug) === 0) {
+                      if (str_starts_with($currentRouteName, $slug)) {
                           $activeClass = 'active open';
                       }
                   }
               } else {
-                  if (str_contains($currentRouteName, $menu->slug) and strpos($currentRouteName, $menu->slug) === 0) {
+                  if (str_starts_with($currentRouteName, $menu->slug)) {
                       $activeClass = 'active open';
                   }
               }

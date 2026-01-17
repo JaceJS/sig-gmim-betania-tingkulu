@@ -43,11 +43,15 @@ use App\Http\Controllers\form_elements\InputGroups;
 use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
+use App\Http\Controllers\PublicController;
 
-// Main Page Route - Redirect to dashboard
-Route::get('/', function () {
-  return redirect('/dashboard');
-});
+// ===========================================
+// Public Routes (No Auth Required)
+// ===========================================
+Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/peta-jemaat', [PublicController::class, 'peta'])->name('public.peta');
+Route::get('/kegiatan-gereja', [PublicController::class, 'kegiatan'])->name('public.kegiatan');
+Route::get('/profil', [PublicController::class, 'profil'])->name('public.profil');
 
 // layout
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
