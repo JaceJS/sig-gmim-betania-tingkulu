@@ -45,6 +45,7 @@ Route::middleware('admin')->group(function () {
   Route::resource('jemaat', JemaatController::class);
   Route::resource('kegiatan', KegiatanController::class);
   Route::resource('pengaturan', PengaturanController::class);
+  Route::get('/peta', [PetaController::class, 'index'])->name('peta.index');
 });
 
 // ===========================================
