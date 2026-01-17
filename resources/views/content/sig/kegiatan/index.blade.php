@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/content_navbar_layout')
 
 @section('title', 'Data Kegiatan - SIG GMIM')
 

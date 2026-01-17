@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/content_navbar_layout')
 
 @section('title', 'Peta Jemaat - SIG GMIM')
 
@@ -74,7 +74,7 @@
       .addTo(map)
       .bindPopup(
         '<strong>{{ $pengaturan['nama_gereja'] ?? 'GMIM Betania Tingkulu' }}</strong><br>{{ $pengaturan['alamat_gereja'] ?? '' }}'
-        );
+      );
 
     // Load data jemaat
     fetch('{{ route('peta.data') }}')

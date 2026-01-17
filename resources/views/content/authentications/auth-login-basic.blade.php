@@ -1,4 +1,4 @@
-@extends('layouts/blankLayout')
+@extends('layouts/blank_layout')
 
 @section('title', 'Login - SIG GMIM')
 

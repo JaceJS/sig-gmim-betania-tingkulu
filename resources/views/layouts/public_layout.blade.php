@@ -2,7 +2,7 @@
   {!! Helper::updatePageConfig($pageConfigs) !!}
 @endisset
 
-@extends('layouts/commonMaster')
+@extends('layouts/common_master')
 
 @section('layoutContent')
   <div class="d-flex flex-column min-vh-100">
