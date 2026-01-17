@@ -37,10 +37,6 @@
             <a href="{{ url('/dashboard') }}" class="btn btn-light btn-sm ms-3">
               <i class="bx bx-cog me-1"></i>Admin
             </a>
-          @else
-            <a href="{{ url('/login') }}" class="btn btn-outline-light btn-sm ms-3">
-              <i class="bx bx-log-in me-1"></i>Masuk
-            </a>
           @endauth
         </div>
       </div>

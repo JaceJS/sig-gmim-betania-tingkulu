@@ -126,9 +126,9 @@ use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PetaController;
 
 // Auth Routes (Guest)
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'authenticate']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/admin/login', [AuthController::class, 'authenticate']);
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin Routes (Protected)
 Route::middleware('admin')->group(function () {
