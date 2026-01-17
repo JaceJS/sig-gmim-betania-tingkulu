@@ -107,3 +107,26 @@ Route::get('/form/layouts-horizontal', [HorizontalForm::class, 'index'])->name('
 
 // tables
 Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic');
+
+// ===========================================
+// SIG GMIM Routes
+// ===========================================
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WilayahController;
+use App\Http\Controllers\JemaatController;
+use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\PetaController;
+
+// Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Resource Routes
+Route::resource('wilayah', WilayahController::class);
+Route::resource('jemaat', JemaatController::class);
+Route::resource('kegiatan', KegiatanController::class);
+Route::resource('pengaturan', PengaturanController::class);
+
+// Peta Publik
+Route::get('/peta', [PetaController::class, 'index'])->name('peta.index');
+Route::get('/peta/data', [PetaController::class, 'data'])->name('peta.data');
