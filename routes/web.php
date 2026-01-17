@@ -111,6 +111,7 @@ Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic')
 // ===========================================
 // SIG GMIM Routes
 // ===========================================
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\JemaatController;
@@ -118,15 +119,20 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PetaController;
 
-// Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Auth Routes (Guest)
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Resource Routes
-Route::resource('wilayah', WilayahController::class);
-Route::resource('jemaat', JemaatController::class);
-Route::resource('kegiatan', KegiatanController::class);
-Route::resource('pengaturan', PengaturanController::class);
+// Admin Routes (Protected)
+Route::middleware('admin')->group(function () {
+  Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+  Route::resource('wilayah', WilayahController::class);
+  Route::resource('jemaat', JemaatController::class);
+  Route::resource('kegiatan', KegiatanController::class);
+  Route::resource('pengaturan', PengaturanController::class);
+});
 
-// Peta Publik
+// Peta Publik (No Auth)
 Route::get('/peta', [PetaController::class, 'index'])->name('peta.index');
 Route::get('/peta/data', [PetaController::class, 'data'])->name('peta.data');
